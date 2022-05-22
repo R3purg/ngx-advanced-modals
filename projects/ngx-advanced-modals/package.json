@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/R3purg/ngx-advanced-modals.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/R3purg/ngx-advanced-modals/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/R3purg/ngx-advanced-modals",
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": "~13.1.0",

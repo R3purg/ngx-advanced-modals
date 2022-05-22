@@ -1,27 +1,184 @@
-# AdvancedModals
+A dynamic modal component with modal data injection for Angular 4 - 13. (https://github.com/R3purg/ngx-advanced-modals)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.3.
+# NgxAdvancedModals
 
-## Development server
+[![Support](https://img.shields.io/badge/Support-Angular%204%2B-blue.svg?style=flat-square)]() [![Support](https://img.shields.io/badge/Support-Angular%205%2B-blue.svg?style=flat-square)]() [![Support](https://img.shields.io/badge/Support-Angular%206%2B-blue.svg?style=flat-square)]() [![Support](https://img.shields.io/badge/Support-Angular%207%2B-blue.svg?style=flat-square)]() [![Support](https://img.shields.io/badge/Support-Angular%208%2B-blue.svg?style=flat-square)]() [![Support](https://img.shields.io/badge/Support-Angular%209%2B-blue.svg?style=flat-square)]() [![Support](https://img.shields.io/badge/Support-Angular%2010%2B-blue.svg?style=flat-square)]() [![Support](https://img.shields.io/badge/Support-Angular%2011%2B-blue.svg?style=flat-square)]() [![Support](https://img.shields.io/badge/Support-Angular%2012%2B-blue.svg?style=flat-square)]() [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)]()
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Table of contents
 
-## Code scaffolding
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Available ModalItem Options](#available-modalitem-options)
+  - [Using ModalItem options](#using-modalitem-options)
+- [Versioning](#versioning)
+- [Creator](#creator)
+  - [Martynas Dambrauskas](#martynas-dambrauskas)
+- [License](#license)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+- Dynamic NgxAdvancedModalsComponent
+- Configurable option through ModalItem
+- Custom style support with ::ng-deep
+- Dynamic modal forms, buttons and text
+- Inject your wanted ModalItem into NgxAdvancedModals and get your desired results
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Running unit tests
+`ngx-advanced-modals` is available via [npm](https://www.npmjs.com/package/ngx-advanced-modals)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Using npm:
 
-## Running end-to-end tests
+```bash
+$ npm install ngx-advanced-modals --save
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Using angular-cli:
 
-## Further help
+```bash
+$ ng add ngx-advanced-modals
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Usage
+
+1. Import `NgxAdvancedModalsModule` in the root module(`AppModule`):
+
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxAdvancedModalsModule } from 'ngx-advanced-modals';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+	declarations: [
+		AppComponent
+	],
+	imports: [
+		BrowserModule,
+		NgxAdvancedModalsModule,
+		BrowserAnimationsModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+2. Create 3 variables wherever you want to use the package:
+```typescript
+dialogRef: MatDialogRef<NgxAdvancedModalsComponent, ModalItem> | undefined;
+modalSettingItem: ModalSettingItems;
+modalItem: ModalConfig;
+```
+
+3. In your component, where you created the 3 previous variables, give those variables a declaration:
+```typescript
+this.modalSettingItem = new ModalSettingItems();
+this.modalItem = new ModalConfig(this.modalSettingItem._baseModalData);
+```
+
+4. `ModalSettingItems` accepts object of type `ModalItem`:
+
+```typescript
+Title: string;
+Description: string;
+Input: string;
+Buttons: DialogButtons[];
+Output: any;
+OnClick: Function;
+FormGroup: DialogForm[];
+```
+
+5. Finally, you can call the dialog using the base `MatDialog` options:
+```typescript
+this.dialogRef = this.dialog.open(NgxAdvancedModalsComponent, this.modalItem);
+```
+
+Now use in your template:
+```html
+<ngx-advanced-modals></ngx-advanced-modals>
+```
+
+## Available `ModalItem` options
+
+- **[Title]**: Title of the modal. Default value `What is yout name?`.
+- **[Description]**: Description of the modal. Default value is empty string.
+- **[Input]**: This variable will be set on form input, leave empty string or declare if you want to use a default input value.
+- **[Buttons]**: An array of `DialogButtons`, which will be displayed in the dialog. Default are `Confirm` and `Cancel` buttons.
+- **[Output]**: The output value of the dialog. Default value is `null`. When the dialog is closed, `Input` data is assigned to it.
+- **[OnClick]**: `Function` that alters output data. Default function is `(output: any) => { return output; }`.
+- **[FormGroup]**: An array of `DialogForm` objects. Here you declare eveyr form, that will be displayed in the modal. Default object is
+```typescript
+[
+	new DialogForm(
+		new FormControl(
+			'',
+			Validators.required
+		),
+		'Input',
+		'text',
+		2,
+		16
+	)
+]
+```
+
+#### Using `ModalItem` options
+
+```typescript
+new ModalItem(
+	'What is your name?',
+	'',
+	'',
+	[
+		new DialogButtons(
+			'Confirm',
+			'',
+			true
+		),
+		new DialogButtons(
+			'Cancel',
+			'',
+			false
+		)
+	],
+	null,
+	(output: any) => { return output;},
+	[
+		new DialogForm(
+			new FormControl(
+				'',
+				Validators.required
+			),
+			'Input',
+			'text',
+			2,
+			16
+		)
+	],
+);
+```
+
+---
+
+## Versioning
+
+ngx-advanced-modals will be maintained under the Semantic Versioning guidelines.
+Releases will be numbered with the following format:
+
+`<major>.<minor>.<patch>`
+
+For more information on SemVer, please visit http://semver.org.
+
+## Creator
+
+#### [Martynas Dambrauskas](mailto:marcius989@gmail.com)
+
+- [@GitHub](https://github.com/R3purg)
+
+## License
+
+ngx-advanced-modals is [MIT licensed](./LICENSE).

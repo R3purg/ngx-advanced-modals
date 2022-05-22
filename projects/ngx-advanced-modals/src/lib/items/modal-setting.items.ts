@@ -29,15 +29,14 @@ export class ModalSettingItems {
 		(output: any) => { return output; },
 		[
 			new DialogForm(
-				/*Form*/
 				new FormControl(
 					'',
 					Validators.required
 				),
 				'Input',
 				'text',
-        2,
-        16
+				2,
+				16
 			)
 		],
 	);
