@@ -1,0 +1,32 @@
+<div class="dialog-container">
+	<button mat-icon-button [disableRipple]="true" class="close-button" (click)="onNoClick()">
+		<mat-icon class="close-icon">close</mat-icon>
+	</button>
+	<h1 mat-dialog-title>{{ data.Title }}</h1>
+	<p *ngIf="data.Description">{{ data.Description }}</p>
+	<div mat-dialog-content fxLayout="row wrap" class="extra-data">
+		<ng-container *ngIf="data.FormGroup">
+			<div [formGroup]="formGroup" fxFlex="calc(100% - 6em)">
+				<ng-container *ngFor="let ctrl of data.FormGroup">
+					<mat-form-field
+						style="margin-bottom: 1%;"
+						appearance="outline">
+						<input matInput (keydown.enter)="$event.preventDefault()" [placeholder]="ctrl.Placeholder" [minlength]="ctrl.MinLength ?? -1" [maxlength]="ctrl.MaxLength ?? -1" [type]="ctrl.Type" [formControlName]="ctrl.Placeholder" (input)="data.Input = input($event)">
+						<mat-error *ngIf="(ctrl.Form.hasError('pattern')) && !ctrl.Form.hasError('required')">Invalid format</mat-error>
+						<mat-error *ngIf="ctrl.Form.hasError('required')">Required field</mat-error>
+						<button *ngIf="ctrl.Form.value.length > 0" (keydown.enter)="$event.preventDefault()" tabIndex="-1" matSuffix mat-icon-button aria-label="Clear" (click)="ctrl.Form.setValue('')">
+							<mat-icon>close</mat-icon>
+						</button>
+					</mat-form-field>
+				</ng-container>
+			</div>
+		</ng-container>
+	</div>
+	<div mat-dialog-actions>
+		<ng-container *ngFor="let btn of data.Buttons">
+			<div class="{{btn.Style}}">
+				<button mat-button [mat-dialog-close]="data" [disabled]="!checkFormValidity()" (click)="data.Output = data.OnClick(data.Input ?? btn.Output)" style="width: 100%; font-size: 16px;">{{ btn.Text }}</button>
+			</div>
+		</ng-container>
+	</div>
+</div>

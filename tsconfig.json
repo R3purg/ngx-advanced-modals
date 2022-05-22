@@ -11,6 +11,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "ngx-advanced-modals": [
+        "dist/ngx-advanced-modals/ngx-advanced-modals",
+        "dist/ngx-advanced-modals"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,

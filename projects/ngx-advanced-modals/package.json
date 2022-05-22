@@ -1,0 +1,31 @@
+{
+  "name": "ngx-advanced-modals",
+  "version": "0.0.1",
+  "description": "A dynamic modal component with modal data injection",
+  "keywords": ["angular", "modal", "modals", "advanced-modal", "advanced-modals", "angular4", "angular5", "angular6", "angular7", "angular8", "angular9", "angular10", "angular11", "angular12", "ngx", "ng4", "ng5", "ng6", "ng7", "ng8", "ng9", "ng10", "ng11", "ng12"],
+  "author": {
+    "name": "Martynas Dambrauskas"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "~13.1.0",
+    "@angular/core": "~13.1.0",
+    "@angular/animations": "~13.1.0",
+    "@angular/cdk": "^13.3.7",
+    "@angular/flex-layout": "^13.0.0-beta.38",
+    "@angular/forms": "~13.1.0",
+    "@angular/material": "^13.3.7",
+    "rxjs": "~7.4.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
